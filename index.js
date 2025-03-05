@@ -86,6 +86,29 @@ async function launch() {
         
         /*!-======[ INITIALIZE Exp Functions ]======-!*/
         Data.initialize({ Exp, store })
+	  
+	  /*!-======[ Auto Delete Chat Every 5 Minutes ]======-!*/
+setInterval(async () => {
+    const now = Date.now()
+    store.messages.forEach(async (messages, jid) => {
+        const messagesToDelete = messages.filter(msg => 
+            now - (msg.messageTimestamp * 1000) >= 300000
+        )
+        for (const msg of messagesToDelete) {
+            try {
+                await Exp.sendMessage(jid, { 
+                    delete: { 
+                        id: msg.key.id, 
+                        remoteJid: msg.key.remoteJid, 
+                        fromMe: msg.key.fromMe 
+                    } 
+                })
+            } catch (error) {
+                console.error('Gagal menghapus pesan:', error)
+            }
+        }
+    })
+}, 300000)
 
         /*!-======[ Detect File Update ]======-!*/
         keys["detector"] && clearInterval(keys["detector"])
