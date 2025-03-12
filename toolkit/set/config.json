@@ -20,14 +20,14 @@
     "autoreadgc": true,
     "welcome": "linkpreview",
     "first": {
-      "energy": 200,
+      "energy": 1000,
       "flow": 1,
       "coins": 1,
-      "chargeRate": 0.003,
+      "chargeRate": 0.030,
       "chargingSpeed": 1000,
-      "maxCharge": 300,
+      "maxCharge": 400,
       "trialPrem": {
-        "energy": 1500,
+        "energy": 9500,
         "chargeRate": 0.1,
         "maxCharge": 850,
         "time": "1hari"
